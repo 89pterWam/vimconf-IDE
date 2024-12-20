@@ -327,4 +327,162 @@ If you encouter issues:
     - Verify all required packages are installed via dnf
 
 Remember to always backup your existing .vimrc before making changes!
-            
+
+
+# Adding Preview Functionality to Your Vim IDE
+
+## Step 1: Install Required Dependencies
+
+
+bash
+
+```
+# Install yarn (needed for markdown-preview.nvim)
+sudo npm install -g yarn
+
+# Install instant-markdown-d
+sudo npm -g install instant-markdown-d
+
+# Install firefox if not already installed (Optional)
+sudo dnf install firefox xdg-utils
+
+```
+## Step 2: Add new Plugins
+
+Add these lines in your ``~/.vimrc`` file ust before the ``call plug#end()`` line, in the plugins setion:
+
+vim
+
+```
+" ===== NEW PLUGINS TO ADD =====
+" Preview Support
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }  " Markdown preview
+Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server'}         " Live HTML/CSS preview
+Plug 'suan/vim-instant-markdown'                                        " Instant Markdown preview
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install --frozen-lockfile --production',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+
+
+```
+## Step 3: Add Configuration Settings
+
+Add these lines to your `.vimrc` file after all other configurations (at the end of the file):
+
+vim 
+
+```
+" ========== Preview Configuration ==========
+" Markdown Preview Configuration
+" set to 1, nvim will open the preview window after entering the markdown buffer
+let g:mkdp_auto_start = 0
+
+" set to 1, the nvim will auto close current preview window when change
+" from markdown buffer to another buffer
+let g:mkdp_auto_close = 1
+
+" set to 1, the vim will refresh markdown when save the buffer or
+" leave from insert mode, default 0 is auto refresh markdown as you edit or
+" move the cursor
+let g:mkdp_refresh_slow = 0
+
+" specify browser to open preview page
+let g:mkdp_browser = ''
+
+" set to 1, echo preview page url in command line when open preview page
+let g:mkdp_echo_preview_url = 1
+
+" Bracey Configuration (HTML/CSS Live Preview)
+let g:bracey_browser_command='firefox'
+let g:bracey_auto_start_browser=1
+let g:bracey_refresh_on_save=1
+
+" Instant Markdown Configuration
+let g:instant_markdown_autostart = 0
+let g:instant_markdown_browser = "firefox"
+let g:instant_markdown_mathjax = 1
+
+" Prettier Configuration
+let g:prettier#autoformat = 1
+let g:prettier#autoformat_require_pragma = 0
+
+" ========== Preview Keybindings ==========
+" Markdown Preview
+nmap <C-m> <Plug>MarkdownPreviewToggle
+
+" HTML/CSS Preview (Bracey)
+nmap <C-b> :Bracey<CR>
+nmap <C-S-b> :BraceyStop<CR>
+nmap <C-r> :BraceyReload<CR>
+
+
+```
+
+## Step 4: Install the New Plugins
+
+1. Save your updated `.vimrc`
+1. Open vim
+1. Run `:PlugInstall`
+1. Wait for all installations to Complete
+1. Restart your Vim
+
+## Usage Guide
+ 
+### Markdown Preview
+
+- [x] Start preview: `Ctrl + m` or `:MarkdownPreview`
+- [x] Stop preview: `:MarkdownPreviewStop`
+- [x] Instant preview: `:InstantMardownPreview`
+
+### HTML/CSS Preview
+
+- [x] Start preview: `Ctrl + b` or `:Bracey`
+- [x] Stop preview: `Ctrl + Shift + b` or `:BraceyStop`
+- [x] Reload preview: `Ctrl + r` or `:BraceyReload`
+- [x] Preview updates in real-timeoutlen
+
+
+### Prettier Integration
+
+- [x] Auto-formats supported files on save
+- [x] Manual format: `:PrettierAsync`
+- [x] Supports multiples file types (JavaScript, TypeScript, CSS, HTML,etc.)
+
+### Troubleshooting 
+
+If you encouter issues:
+
+
+  1. Verify dependencies:
+
+
+bash
+
+```
+yarn --version
+npm --version
+firefox --version
+
+```
+  1. Common fixes:
+
+  - [x] Run `:checkhealth` in Vim to identify issues
+  - [x] Try reinstalling plugins: `:PlugClean` followed by `:PlugInstall`
+  - [x] Check browser settings if previews don't open
+  - [x] Ensure all npm packages are installed globally
+
+  1. Plugin-specific issues:
+
+  - [x] For markdown-preview: Try running `cd ~/.vimrc/plugged/markdown-preview.nvim/app && yarn install`
+  - [x] For Brace: Check if the server is installed with `ls ~/.vimrc/plugged/bracey.vim/server/node_modules`
+
+
+### Notes
+
+- [x] Previews open in Firefox by default(can be changed in configuration)
+- [x] Live preview updates might have a slight delay dependining on the file size
+- [x] Some features require an active internet connection(for CDN resources)
+- [x] Preview windows automatically close when switching buffers (configurable)
+
+
+
