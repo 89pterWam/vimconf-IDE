@@ -19,15 +19,16 @@
 
 bash
 ```
-[*Install Node.js (required for CoC*)]: #
+[Install Node.js (required for CoC)]: #
 sudo dnf install nodejs npm
 
-[*Install ripgrep (required ofr FZF searchin*)]: #
+[Install ripgrep (required for FZF searching)]: #
 sudo dnf install ripgrep
 
-[*Install language servers*]: #
+[Install language servers]: #
 sudo dnf install -g typescript typescript-language-server
 pip3 install python-language-server
+
 ```
 
 1. Install vim-plug
@@ -36,11 +37,11 @@ pip3 install python-language-server
 bash
 
 ```
-==curl== -fLo ~/.vim/autoload/plug.vim --create-dirs \
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
         <https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim>
 ```
-1. Copy the entire configuration below to your ==~/.vimrc== file
-1. Open Vim and run ==:PlugInstall===
+1. Copy the entire configuration below to your <mark>**~/.vimrc**</mark> file
+1. Open Vim and run <mark>:**PlugInstall**</mark>
 
 ### Vim Configuration File
 
@@ -207,46 +208,46 @@ autocmd BufReadPost *
 
 ##### File Navigation
 
-+ ==Ctrl + n==: Toggel NERDTree file explorer
-+ ==Ctrl + p==: Fuzzy file Search
-+ ==Ctrl + f==: Full Text search in project
++ `Ctrl + n`: Toggel NERDTree file explorer
++ `Ctrl + p`: Fuzzy file Search
++ `Ctrl + f`: Full Text search in project
 
 #### Window Management
 
-+ ==Ctrl + h/j/k/l==: Navigate between splits
-+ ==:vs==: Vertical split
-+ ==:sp==: Horizontal split
-+ ==leader + t==: Open terminal in vertical split 
++ ``Ctrl + h/j/k/l``: Navigate between splits
++ ``:vs``: Vertical split
++ ``:sp``: Horizontal split
++ ``leader + t``: Open terminal in vertical split 
 
 #### Code Navigation
 
-+ ==gd==: Go to definition
-+ ==gy==: Go to type definition
-+ ==gi==: Go to Implementation
-+ ==gr==: Go to references
-+ ==k==: Show documentation
++ ``gd``: Go to definition
++ ``gy``: Go to type definition
++ ``gi``: Go to Implementation
++ ``gr``: Go to references
++ ``k`` : Show documentation
 
 #### Code Completion
 
-+ ==Tab==: Navigation completion menu
-+ ==Shift + Tab==: Navigate completion menu backwards
-+ ==Enter==: Select completion item
++ ``Tab``: Navigation completion menu
++ ``Shift + Tab``: Navigate completion menu backwards
++ ``Enter``: Select completion item
 
 
 #### Git Commands
 
-+ ==:Git==: Access git Commands
-+ ==:Gstatus==: View git Status
-+ ==:Gdiff==: View git diff
++ ``:Git``: Access git Commands
++ ``:Gstatus``: View git Status
++ ``:Gdiff``: View git diff
 
 
 #### Basic Commands
 
-+ ==:w==: Save file
-+ ==:q==: Quit
-+ ==:wq==: Save and Quit
-+ ==:e filename==: Open file
-+ ==:bd==: close buffers
++ ``:w``: Save file
++ ``:q``: Quit
++ ``:wq``: Save and Quit
++ ``:e filename``: Open file
++ ``:bd``: close buffers
 
 
 ### Language-Specific Features
@@ -286,20 +287,18 @@ autocmd BufReadPost *
 Add to your ~/.vimrc:
 
 vim
-```
-colorscheme onedark "Or any other installed Them"
 
-```
+`colorscheme onedark "Or any other installed Them"`
 
 #### Adding New Plugins 
 
-1. Add new Plug entries between ==call plug#begin() and callplug#end()==
-1. Run ==:PlugInstall==
+1. Add new Plug entries between ``call plug#begin() and callplug#end()``
+1. Run ``:PlugInstall``
 
 #### Adding Language Servers
 
 1. Install the language server
-1. Add corresponding coc-extension to ==g:coc_global_extensions==
+1. Add corresponding coc-extension to ``g:coc_global_extensions``
 1. Restart Vim
 
 ### Troubleshooting
@@ -307,23 +306,23 @@ colorscheme onedark "Or any other installed Them"
 If you encouter issues:
 
  1. Check Dependencies:
-    - Run ==node --version== to verify Node.js Installation
-    - Check if vim-plug is installed in ~/.vim/autoload/
+    - Run **node --version** to verify Node.js Installation
+    - Check if vim-plug is installed in **~/.vim/autoload/**
     - Verify language servers are installed
 
  1. Common Solutions:
-    - Run ==:checkhealth== to identify problems
-    - Check ==:messages== for errors
-    - Update plugins with ==:PlugUpdate
-    - Run ==:CocInfo== to check CoCstatus
+    - Run ``:checkhealth`` to identify problems
+    - Check ``:messages`` for errors
+    - Update plugins with **:PlugUpdate**
+    - Run ``:CocInfo`` to check CoCstatus
 
  1. Plugin-Specific Issues:
-    - NERDTree: Run ==:NERDTreeToggle to check for errors
-    - CoC:Check ==:CocConfi for proper configuration
-    - FZF:Verify ripgrep installation with ==rg --version==
+    - NERDTree: Run ``:NERDTreeToggle`` to check for errors
+    - ``CoC:Check`` :CocConfi for proper configuration
+    - FZF: Verify ripgrep installation with ``rg --version``
     
  1. If problems persist:
-    - Remove ~/.vim/plugged/ directory and reinstall plugins
+    - Remove **~/.vim/plugged/** directory and reinstall plugins
     - Check system logs for any relevant errors
     - Verify all required packages are installed via dnf
 
